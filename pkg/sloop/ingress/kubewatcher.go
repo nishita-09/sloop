@@ -314,10 +314,10 @@ func (i *kubeWatcherImpl) processUpdate(kind string, obj interface{}, watchResul
 		glog.V(2).Infof("No namespace for resource: %v", err)
 	}
 	if err1 != nil {
-		glog.V(2).Infof("Extract event info: %v", err1)
+		glog.V(2).Infof("Error occured while extracting events information: %v", err1)
 	}
 	if err2 != nil {
-		glog.V(2).Infof("Extract Involved Object error: %v", err2)
+		glog.V(2).Infof("Error occured while extracting Involved Object Info: %v", err2)
 	}
 	metricIngressKubewatchcount.WithLabelValues(kind, watchResult.WatchType.String(), kubeMetadata.Namespace, kubeMetadata.Name, InvolvedObject.Kind, EventInfo.Reason, EventInfo.Type).Inc()
 	metricIngressKubewatchbytes.WithLabelValues(kind, watchResult.WatchType.String(), kubeMetadata.Namespace, kubeMetadata.Name, InvolvedObject.Kind, EventInfo.Reason, EventInfo.Type).Add(float64(len(resourceJson)))
